@@ -1,0 +1,171 @@
+{
+  "restaurant": {
+    "name": "Papazyner's",
+    "tagline": "Quality of Real Taste",
+    "address": "24, Ogunsiji street, Allen Avenue, Ikeja Lagos",
+    "phone": "08032775719",
+    "whatsappNumber": "2348032775719",
+    "website": "https://www.papazyners.com",
+    "social": {
+      "facebook": "@papazyners",
+      "twitter": "@papazyners",
+      "instagram": "@papazyners"
+    }
+  },
+  "categories": [
+    {
+      "id": "main-dishes",
+      "name": "Main Dishes & Sides",
+      "icon": "🍛",
+      "items": [
+        { "id": "ofada-rice", "name": "Ofada Rice with Sauce", "price": 2000, "image": "/images/ofada-rice.jpg" },
+        { "id": "smokky-jollof", "name": "Smokky Jollof Rice", "price": 700, "image": "/images/smokky-jollof-rice.jpg" },
+        { "id": "fried-rice", "name": "Fried Rice", "price": 1000, "image": "/images/fried-rice.jpg" },
+        { "id": "special-fried-rice", "name": "Special Fried Rice", "price": 1500, "image": "/images/special-fried-rice.jpg" },
+        { "id": "moimoi", "name": "Moimoi", "price": 1000, "image": "/images/moimoi.jpg" },
+        { "id": "yam-egg-sauce", "name": "Yam & Egg Sauce", "price": 1700, "image": "/images/yam-egg-sauce.jpg" },
+        { "id": "yam-pottage", "name": "Yam Pottage", "price": 750, "image": "/images/yam-pottage.jpg" },
+        { "id": "porrage-beans", "name": "Porrage Beans", "price": 800, "image": "/images/porrage-beans.jpg" },
+        { "id": "plantain", "name": "Plantain", "price": 500, "image": "/images/plantain.jpg" },
+        { "id": "jollof-spaghetti", "name": "Jollof Spaghetti", "price": 1000, "image": "/images/jollof-spaghetti.jpg" },
+        { "id": "boiled-egg", "name": "Boiled Egg", "price": 400, "image": "/images/boiled-egg.jpg" },
+        { "id": "white-beans", "name": "White Beans", "price": 700, "image": "/images/white-beans.jpg" },
+        { "id": "coleslaw", "name": "Coleslaw", "price": 1000, "image": "/images/coleslaw.jpg" },
+        { "id": "green-salad", "name": "Green Salad", "price": 1000, "image": "/images/green-salad.jpg" }
+      ]
+    },
+    {
+      "id": "protein",
+      "name": "Protein",
+      "icon": "🥩",
+      "items": [
+        { "id": "pepper-beef", "name": "Pepper Beef", "price": 500, "image": "/images/pepper-beef.jpg" },
+        { "id": "cow-ponmo", "name": "Cow Ponmo", "price": 500, "image": "/images/cow-ponmo.jpg" },
+        { "id": "fried-hake-fish", "name": "Fried Hake Fish", "price": 2000, "image": "/images/fried-hake-fish.jpg" },
+        { "id": "grilled-chicken", "name": "Grilled Chicken", "price": 2000, "image": "/images/grilled-chicken.jpg" },
+        { "id": "ofada-beef-sauce", "name": "Ofada Beef Sauce", "price": 1000, "image": "/images/ofada-beef-sauce.jpg" }
+      ]
+    },
+    {
+      "id": "swallow",
+      "name": "Swallow",
+      "icon": "🍚",
+      "items": [
+        { "id": "amala", "name": "Amala", "price": 500, "image": "/images/amala.jpg" },
+        { "id": "poundo-yam", "name": "Poundo Yam", "price": 600, "image": "/images/poundo-yam.jpg" },
+        { "id": "semovita", "name": "Semovita", "price": 600, "image": "/images/semovita.jpg" },
+        { "id": "eba", "name": "Eba", "price": 500, "image": "/images/eba.jpg" }
+      ]
+    },
+    {
+      "id": "soups",
+      "name": "Soups",
+      "icon": "🥘",
+      "items": [
+        { "id": "efo-riro", "name": "Efo Riro", "price": 1500, "image": "/images/efo-riro.jpg" },
+        { "id": "egusi", "name": "Egusi", "price": 1000, "image": "/images/egusi.jpg" },
+        { "id": "okro", "name": "Okro", "price": 1000, "image": "/images/okro.jpg" },
+        { "id": "ogbonor", "name": "Ogbonor", "price": 1000, "image": "/images/ogbonor.jpg" }
+      ]
+    },
+    {
+      "id": "platters",
+      "name": "Platters",
+      "icon": "🍖",
+      "items": [
+        {
+          "id": "meaty-mix",
+          "name": "Meaty Mix",
+          "price": 5000,
+          "image": "/images/meaty-mix.jpg",
+          "includes": ["Goat Kebab", "Beef Suya", "Sausage", "Corn", "Fries (Yam or Plantain)"]
+        },
+        {
+          "id": "bird-mania",
+          "name": "Bird Mania",
+          "price": 5000,
+          "image": "/images/bird-mania.jpg",
+          "includes": ["Chicken Wings", "Turkey", "Sausage", "Corn", "Fries (Yam / Chips / Potato)"]
+        },
+        {
+          "id": "suya-mix",
+          "name": "Suya Mix",
+          "price": 5000,
+          "image": "/images/suya-mix.jpg",
+          "includes": ["Beef Suya", "Chicken Suya", "Pork Suya", "Corn", "Fries (Yam or Plantain)"]
+        },
+        {
+          "id": "beef-run",
+          "name": "Beef Run",
+          "price": 10000,
+          "image": "/images/beef-run.jpg",
+          "includes": ["Beef Suya", "Lamb Chops", "Beef Ribs", "Beef Burger", "Corn", "Fries (Yam / Chips / Potato)"]
+        },
+        {
+          "id": "burger-deluxe",
+          "name": "Burger Deluxe",
+          "price": 10000,
+          "image": "/images/burger-deluxe.jpg",
+          "includes": ["Chicken Burger", "Beef Burger", "Shrimps Burger", "Chicken Wings", "Corn", "Fries (Yam / Chips / Potato)"]
+        },
+        {
+          "id": "seafood-a",
+          "name": "Sea Food A",
+          "price": 10000,
+          "image": "/images/seafood-a.jpg",
+          "includes": ["Croacker or Catfish", "Prawns, Crabs", "Corn, Salad", "Plantain", "Fries (Yam / Chips / Potato)"]
+        },
+        {
+          "id": "seafood-b",
+          "name": "Sea Food B",
+          "price": 10000,
+          "image": "/images/seafood-b.jpg",
+          "includes": ["Titus", "Snail, Shrimps", "Corn, Salad", "Plantain", "Fries (Yam / Chips / Potato)"]
+        }
+      ]
+    },
+    {
+      "id": "snacks",
+      "name": "Snacks & Quick Bites",
+      "icon": "🍟",
+      "items": [
+        { "id": "chicken-chips", "name": "Chicken & Chips", "price": 3000, "image": "/images/chicken-chips.jpg", "description": "Corn, Sausage" },
+        { "id": "burger-chicken", "name": "Burger & Chicken", "price": 4500, "image": "/images/burger-chicken.jpg", "description": "Chips, Corn, Sausage" },
+        { "id": "turkey-chips", "name": "Turkey & Chips", "price": 3500, "image": "/images/turkey-chips.jpg", "description": "Corn, Sausage" },
+        { "id": "burger-chips", "name": "Burger & Chips", "price": 2500, "image": "/images/burger-chips.jpg" },
+        { "id": "croaker-fish-chips", "name": "Croaker Fish & Chips", "price": 5000, "image": "/images/croaker-fish-chips.jpg", "description": "Plantain, Corn, Coleslaw" },
+        { "id": "catfish-chips", "name": "Catfish & Chips", "price": 5000, "image": "/images/catfish-chips.jpg", "description": "Plantain, Corn, Coleslaw" },
+        { "id": "titus-boli", "name": "Titus & Boli", "price": 3000, "image": "/images/titus-boli.jpg", "description": "Yam or Sweet Potato, Corn" },
+        {
+          "id": "shawarma",
+          "name": "Shawarma",
+          "price": 1000,
+          "image": "/images/shawarma.jpg",
+          "variations": [
+            { "label": "Small", "price": 1000 },
+            { "label": "Large", "price": 1500 }
+          ]
+        },
+        {
+          "id": "small-chops",
+          "name": "Small Chops",
+          "price": 1000,
+          "image": "/images/small-chops.jpg",
+          "variations": [
+            { "label": "Basic", "price": 1000 },
+            { "label": "Standard", "price": 2000 },
+            { "label": "Premium", "price": 3000 }
+          ]
+        },
+        { "id": "yamarita-sauce", "name": "Yamarita and Sauce", "price": 2000, "image": "/images/yamarita-sauce.jpg" },
+        { "id": "goat-chicken-kebab", "name": "Goat or Chicken Kebab", "price": 1000, "image": "/images/goat-chicken-kebab.jpg" },
+        { "id": "asun", "name": "Asun", "price": 1000, "image": "/images/asun.jpg" },
+        { "id": "mixed-kebab", "name": "Goat/Chicken/Gizzard Kebab", "price": 1000, "image": "/images/mixed-kebab.jpg" },
+        { "id": "suya", "name": "Chicken/Beef/Pork Suya", "price": 1000, "image": "/images/suya.jpg" },
+        { "id": "turkey-only", "name": "Turkey Only", "price": 2500, "image": "/images/turkey-only.jpg" },
+        { "id": "chicken-only", "name": "Chicken Only", "price": 2000, "image": "/images/chicken-only.jpg" },
+        { "id": "plantain-chips-coleslaw", "name": "Plantain Chips + Coleslaw", "price": 1000, "image": "/images/plantain-chips-coleslaw.jpg" }
+      ]
+    }
+  ]
+}
