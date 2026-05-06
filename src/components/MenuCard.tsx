@@ -1,9 +1,11 @@
 // ============================================
 // PAPAZYNER'S - MENU CARD COMPONENT
+// Refined, design-aligned
 // ============================================
 
 import React, { useState } from 'react';
 import type { MenuItem } from '@/utils/types';
+import { formatNaira } from '@/utils/menuParser';
 import PriceSeal from './PriceSeal';
 
 interface MenuCardProps {
@@ -98,7 +100,7 @@ export default function MenuCard({ item, onAddToCart, isInCart }: MenuCardProps)
                 onClick={() => handleVariationSelect(v.label, v.price)}
               >
                 <span>{v.label}</span>
-                <span className="var-price">₦{v.price.toLocaleString('en-NG')}</span>
+                <span className="var-price">{formatNaira(v.price)}</span>
               </button>
             ))}
             <button
@@ -113,35 +115,35 @@ export default function MenuCard({ item, onAddToCart, isInCart }: MenuCardProps)
 
       <style jsx>{`
         .menu-card {
-          background: var(--color-bg-card, rgba(13, 13, 13, 0.85));
-          border: var(--border-gold, 1px solid #D4AF37);
-          border-radius: var(--radius-md, 8px);
+          background: var(--color-bg-card);
+          border: 1px solid var(--color-border-strong);
+          border-radius: var(--radius-md);
           overflow: hidden;
-          transition: all var(--transition-normal, 300ms ease);
+          transition: all var(--transition-base);
           position: relative;
         }
         .menu-card:hover {
-          border-color: var(--color-gold-light, #E8C84A);
-          box-shadow: var(--shadow-gold, 0 0 15px rgba(212, 175, 55, 0.3));
+          border-color: var(--color-gold);
+          box-shadow: var(--shadow-gold);
         }
         .menu-card.in-cart {
-          border-color: var(--color-gold, #D4AF37);
-          box-shadow: inset 0 0 0 1px var(--color-gold, #D4AF37);
+          border-color: var(--color-gold);
+          box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.3);
         }
 
         /* Image */
         .card-image {
           position: relative;
           width: 100%;
-          height: 160px;
+          height: 170px;
           overflow: hidden;
-          background: var(--color-bg-elevated, #1A1A1A);
+          background: var(--color-bg-elevated);
         }
         .card-image img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          transition: transform 0.4s ease;
+          transition: transform 0.4s var(--transition-slow);
         }
         .menu-card:hover .card-image img {
           transform: scale(1.05);
@@ -152,167 +154,162 @@ export default function MenuCard({ item, onAddToCart, isInCart }: MenuCardProps)
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+          background: linear-gradient(135deg, #1A1A1A 0%, #252525 100%);
         }
         .placeholder-icon {
           font-size: 3rem;
-          color: var(--color-gold, #D4AF37);
-          opacity: 0.4;
+          color: var(--color-gold);
+          opacity: 0.35;
         }
 
         /* Price Seal positioning */
         .price-seal-wrapper {
           position: absolute;
-          top: 8px;
-          right: 8px;
+          top: var(--space-2);
+          right: var(--space-2);
           z-index: 2;
-          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+          filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
         }
 
         /* Content */
         .card-content {
-          padding: var(--space-md, 16px);
+          padding: var(--space-4);
         }
         .item-name {
-          font-size: 1.25rem;
-          color: var(--color-text-primary, #FFFFFF);
-          margin-bottom: var(--space-xs, 4px);
-          line-height: 1.3;
+          font-size: var(--text-lg);
+          color: var(--color-text-primary);
+          margin-bottom: var(--space-1);
+          line-height: var(--leading-tight);
         }
         .item-description {
-          font-family: var(--font-body);
-          font-size: 0.8rem;
-          color: var(--color-text-muted, #999999);
-          margin-bottom: var(--space-sm, 8px);
+          font-size: var(--text-sm);
+          color: var(--color-text-muted);
+          margin-bottom: var(--space-2);
+          line-height: var(--leading-normal);
         }
         .item-includes {
-          margin: var(--space-sm, 8px) 0;
+          margin: var(--space-2) 0;
         }
         .includes-label {
-          font-size: 0.7rem;
-          font-weight: 700;
+          font-size: var(--text-xs);
+          font-weight: var(--weight-bold);
           text-transform: uppercase;
-          color: var(--color-gold, #D4AF37);
-          letter-spacing: 0.05em;
+          color: var(--color-gold);
+          letter-spacing: var(--tracking-wider);
         }
         .includes-list {
-          list-style: none;
           display: flex;
           flex-wrap: wrap;
           gap: 4px;
           margin-top: 4px;
         }
         .includes-list li {
-          font-size: 0.7rem;
-          color: var(--color-text-muted, #999999);
-          background: rgba(255, 255, 255, 0.05);
-          padding: 2px 8px;
-          border-radius: 10px;
+          font-size: var(--text-xs);
+          color: var(--color-text-muted);
+          background: var(--color-border-subtle);
+          padding: 3px 8px;
+          border-radius: var(--radius-full);
+          white-space: nowrap;
         }
 
         /* Add Button */
         .add-btn {
           width: 100%;
-          margin-top: var(--space-sm, 8px);
-          padding: 10px;
-          background: var(--color-gold, #D4AF37);
-          color: var(--color-bg, #0D0D0D);
+          margin-top: var(--space-2);
+          padding: 11px;
+          background: var(--color-gold);
+          color: var(--color-text-inverse);
           border: none;
-          border-radius: var(--radius-sm, 4px);
-          font-family: var(--font-body);
-          font-size: 0.85rem;
-          font-weight: 700;
+          border-radius: var(--radius-sm);
+          font-size: var(--text-sm);
+          font-weight: var(--weight-bold);
           text-transform: uppercase;
+          letter-spacing: var(--tracking-wide);
           cursor: pointer;
-          transition: all var(--transition-fast, 150ms ease);
+          transition: all var(--transition-fast);
         }
         .add-btn:hover,
         .add-btn:focus-visible {
-          background: var(--color-gold-light, #E8C84A);
+          background: var(--color-gold-light);
           outline: none;
-          box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+          box-shadow: var(--shadow-gold);
         }
         .add-btn:active {
           transform: scale(0.98);
         }
         .add-btn.added {
           background: transparent;
-          border: 2px solid var(--color-gold, #D4AF37);
-          color: var(--color-gold, #D4AF37);
+          border: 2px solid var(--color-gold);
+          color: var(--color-gold);
         }
 
         /* Variation Overlay */
         .variation-overlay {
           position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          inset: 0;
           background: rgba(0, 0, 0, 0.8);
-          z-index: 200;
+          z-index: var(--z-modal);
           display: flex;
           align-items: flex-end;
           justify-content: center;
           animation: fadeIn 0.2s ease;
         }
         .variation-modal {
-          background: var(--color-bg-elevated, #1A1A1A);
-          border: var(--border-gold-thick, 2px solid #D4AF37);
-          border-radius: var(--radius-lg, 16px) var(--radius-lg, 16px) 0 0;
-          padding: var(--space-lg, 24px);
+          background: var(--color-bg-surface);
+          border: var(--border-gold-thick);
+          border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+          padding: var(--space-6);
           width: 100%;
           max-width: 480px;
-          animation: slideUp 0.3s ease;
+          animation: slideUp 0.3s var(--transition-base);
         }
         .variation-title {
-          font-size: 1.3rem;
-          color: var(--color-gold, #D4AF37);
-          margin-bottom: 4px;
+          font-size: var(--text-xl);
+          color: var(--color-gold);
+          margin-bottom: var(--space-1);
         }
         .variation-subtitle {
-          font-size: 0.8rem;
-          color: var(--color-text-muted, #999999);
-          margin-bottom: var(--space-md, 16px);
+          font-size: var(--text-sm);
+          color: var(--color-text-muted);
+          margin-bottom: var(--space-4);
         }
         .variation-option {
           display: flex;
           justify-content: space-between;
           width: 100%;
           padding: 14px 16px;
-          margin-bottom: 8px;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          border-radius: var(--radius-md, 8px);
-          color: var(--color-text-primary, #FFFFFF);
-          font-family: var(--font-body);
-          font-size: 0.9rem;
+          margin-bottom: var(--space-2);
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          color: var(--color-text-primary);
+          font-size: var(--text-base);
           cursor: pointer;
-          transition: all var(--transition-fast, 150ms ease);
+          transition: all var(--transition-fast);
         }
         .variation-option:hover {
-          background: rgba(212, 175, 55, 0.1);
-          border-color: var(--color-gold, #D4AF37);
+          background: rgba(212, 175, 55, 0.08);
+          border-color: var(--color-gold);
         }
         .var-price {
-          font-weight: 700;
-          color: var(--color-gold, #D4AF37);
+          font-weight: var(--weight-bold);
+          color: var(--color-gold);
         }
         .variation-cancel {
           width: 100%;
           padding: 12px;
-          margin-top: 8px;
+          margin-top: var(--space-2);
           background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: var(--radius-md, 8px);
-          color: var(--color-text-muted, #999999);
-          font-family: var(--font-body);
-          font-size: 0.85rem;
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          color: var(--color-text-muted);
+          font-size: var(--text-sm);
           cursor: pointer;
-          transition: all var(--transition-fast, 150ms ease);
+          transition: all var(--transition-fast);
         }
         .variation-cancel:hover {
-          border-color: var(--color-text-secondary, #E0E0E0);
-          color: var(--color-text-primary, #FFFFFF);
+          border-color: var(--color-text-secondary);
+          color: var(--color-text-primary);
         }
 
         @media (min-width: 768px) {
@@ -324,3 +321,4 @@ export default function MenuCard({ item, onAddToCart, isInCart }: MenuCardProps)
     </div>
   );
 }
+

@@ -41,22 +41,23 @@ export default function CategoryNav({
       <style jsx>{`
         .category-nav {
           position: sticky;
-          top: 72px;
-          z-index: 50;
-          background: rgba(13, 13, 13, 0.88);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-          padding: var(--space-sm, 8px) 0;
+          top: 64px;
+          z-index: var(--z-dropdown);
+          background: rgba(13, 13, 13, 0.9);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-bottom: 1px solid var(--color-border);
+          padding: var(--space-2) 0;
         }
         .category-scroll {
           display: flex;
-          gap: var(--space-sm, 8px);
+          gap: var(--space-2);
           overflow-x: auto;
-          padding: 0 var(--space-md, 16px);
+          padding: 0 var(--space-4);
           scrollbar-width: none;
           -ms-overflow-style: none;
           -webkit-overflow-scrolling: touch;
+          scroll-behavior: smooth;
         }
         .category-scroll::-webkit-scrollbar {
           display: none;
@@ -64,45 +65,49 @@ export default function CategoryNav({
         .category-chip {
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 5px;
           white-space: nowrap;
           background: transparent;
-          border: 1px solid rgba(212, 175, 55, 0.3);
-          color: var(--color-text-secondary, #E0E0E0);
-          padding: 6px 14px;
-          border-radius: 20px;
-          font-family: var(--font-body);
-          font-size: 0.8rem;
-          font-weight: 500;
+          border: 1px solid var(--color-border-strong);
+          color: var(--color-text-secondary);
+          padding: 7px 14px;
+          border-radius: var(--radius-full);
+          font-size: var(--text-xs);
+          font-weight: var(--weight-medium);
           cursor: pointer;
-          transition: all var(--transition-fast, 150ms ease);
+          transition: all var(--transition-fast);
           flex-shrink: 0;
+          min-height: 36px;
         }
         .category-chip:hover {
-          border-color: var(--color-gold, #D4AF37);
-          color: var(--color-gold, #D4AF37);
+          border-color: var(--color-gold);
+          color: var(--color-gold);
         }
         .category-chip.active {
-          background: var(--color-gold, #D4AF37);
-          border-color: var(--color-gold, #D4AF37);
-          color: var(--color-bg, #0D0D0D);
-          font-weight: 700;
+          background: var(--color-gold);
+          border-color: var(--color-gold);
+          color: var(--color-text-inverse);
+          font-weight: var(--weight-bold);
         }
         .category-icon {
-          font-size: 1rem;
+          font-size: var(--text-md);
         }
         .category-label {
-          font-size: 0.78rem;
+          font-size: var(--text-xs);
         }
 
         @media (min-width: 768px) {
           .category-scroll {
             justify-content: center;
-            gap: var(--space-md, 16px);
+            gap: var(--space-3);
           }
           .category-chip {
-            font-size: 0.85rem;
+            font-size: var(--text-sm);
             padding: 8px 18px;
+            min-height: 40px;
+          }
+          .category-label {
+            font-size: var(--text-sm);
           }
         }
       `}</style>

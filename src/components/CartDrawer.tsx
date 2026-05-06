@@ -1,8 +1,10 @@
 // ============================================
 // PAPAZYNER'S - CART DRAWER COMPONENT
+// Quick view slide-over with link to full cart
 // ============================================
 
 import React, { useRef, useEffect } from 'react';
+import Link from 'next/link';
 import type { CartItem } from '@/utils/types';
 import { formatNaira } from '@/utils/menuParser';
 
@@ -32,23 +34,20 @@ export default function CartDrawer({
   const drawerRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  // Trap focus and manage body scroll lock
   useEffect(() => {
     if (isOpen) {
       previousFocusRef.current = document.activeElement as HTMLElement;
       document.body.style.overflow = 'hidden';
 
-      // Focus the drawer
       setTimeout(() => {
         drawerRef.current?.focus();
       }, 100);
 
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose();
-        // Focus trap
         if (e.key === 'Tab' && drawerRef.current) {
           const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
-            'button, [tabindex]:not([tabindex="-1"])'
+            'button, a, [tabindex]:not([tabindex="-1"])'
           );
           const first = focusable[0];
           const last = focusable[focusable.length - 1];
@@ -153,11 +152,18 @@ export default function CartDrawer({
                       onClick={() => onRemoveItem(item.id, item.variationLabel)}
                       aria-label={`Remove ${item.name}`}
                     >
-                      🗑
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
                     </button>
                   </div>
                 </div>
               ))}
+
+              {/* Link to full cart page */}
+              <Link href="/cart" className="view-full-cart" onClick={onClose}>
+                View Full Cart →
+              </Link>
             </div>
 
             {/* Footer with Total & Checkout */}
@@ -167,7 +173,7 @@ export default function CartDrawer({
                   <span>Items ({totalItems})</span>
                   <span>{formatNaira(subtotal)}</span>
                 </div>
-                <div className="gold-divider" style={{ margin: '12px 0' }} />
+                <div className="gold-divider" style={{ margin: 'var(--space-3) 0' }} />
                 <div className="summary-row total">
                   <span>Total</span>
                   <span>{formatNaira(subtotal)}</span>
@@ -193,12 +199,9 @@ export default function CartDrawer({
         <style jsx>{`
           .drawer-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 300;
+            inset: 0;
+            background: var(--color-bg-overlay);
+            z-index: var(--z-drawer);
             display: flex;
             justify-content: flex-end;
             animation: fadeIn 0.2s ease;
@@ -207,60 +210,60 @@ export default function CartDrawer({
             width: 100%;
             max-width: 420px;
             height: 100%;
-            background: var(--color-bg, #0D0D0D);
-            border-left: 2px solid var(--color-gold, #D4AF37);
+            background: var(--color-bg);
+            border-left: 2px solid var(--color-gold);
             display: flex;
             flex-direction: column;
-            animation: slideInRight 0.3s ease;
+            animation: slideInRight 0.3s var(--transition-base);
             outline: none;
           }
           .drawer-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--space-lg, 24px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: var(--space-5) var(--space-6);
+            border-bottom: 1px solid var(--color-border);
             flex-shrink: 0;
           }
           .drawer-title {
-            font-size: 1.4rem;
-            color: var(--color-gold, #D4AF37);
+            font-size: var(--text-xl);
+            color: var(--color-gold);
           }
           .drawer-header-actions {
             display: flex;
-            gap: var(--space-sm, 8px);
+            gap: var(--space-2);
             align-items: center;
           }
           .clear-btn {
             background: none;
             border: none;
-            color: var(--color-text-muted, #999999);
-            font-family: var(--font-body);
-            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            font-size: var(--text-xs);
             cursor: pointer;
             padding: 4px 8px;
-            transition: color var(--transition-fast, 150ms ease);
+            transition: color var(--transition-fast);
+            border-radius: var(--radius-sm);
           }
           .clear-btn:hover {
-            color: var(--color-red, #E31E24);
+            color: var(--color-red);
           }
           .close-btn {
             background: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--color-text-secondary, #E0E0E0);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
             width: 32px;
             height: 32px;
-            border-radius: 50%;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 0.9rem;
-            transition: all var(--transition-fast, 150ms ease);
+            font-size: var(--text-base);
+            transition: all var(--transition-fast);
           }
           .close-btn:hover {
-            border-color: var(--color-gold, #D4AF37);
-            color: var(--color-gold, #D4AF37);
+            border-color: var(--color-gold);
+            color: var(--color-gold);
           }
 
           /* Empty State */
@@ -270,59 +273,60 @@ export default function CartDrawer({
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: var(--space-xl, 32px);
+            padding: var(--space-8);
             text-align: center;
           }
           .empty-icon {
             font-size: 4rem;
-            margin-bottom: var(--space-md, 16px);
+            margin-bottom: var(--space-4);
           }
           .empty-text {
-            font-size: 1.1rem;
-            color: var(--color-text-secondary, #E0E0E0);
-            font-weight: 500;
+            font-size: var(--text-lg);
+            color: var(--color-text-secondary);
+            font-weight: var(--weight-medium);
           }
           .empty-sub {
-            font-size: 0.85rem;
-            color: var(--color-text-muted, #999999);
-            margin-top: 4px;
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-top: var(--space-1);
           }
 
           /* Items */
           .drawer-items {
             flex: 1;
             overflow-y: auto;
-            padding: var(--space-md, 16px);
+            padding: var(--space-4);
           }
           .cart-item {
-            padding: var(--space-md, 16px);
-            margin-bottom: var(--space-sm, 8px);
-            background: var(--color-bg-elevated, #1A1A1A);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: var(--radius-md, 8px);
+            padding: var(--space-4);
+            margin-bottom: var(--space-2);
+            background: var(--color-bg-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
           }
           .cart-item-info {
             display: flex;
             flex-wrap: wrap;
             align-items: baseline;
             gap: 6px;
-            margin-bottom: var(--space-sm, 8px);
+            margin-bottom: var(--space-2);
           }
           .cart-item-name {
             font-family: var(--font-script);
-            font-size: 1rem;
-            color: var(--color-text-primary, #FFFFFF);
+            font-size: var(--text-md);
+            color: var(--color-text-primary);
           }
           .cart-item-variation {
-            font-size: 0.7rem;
-            color: var(--color-gold, #D4AF37);
-            background: rgba(212, 175, 55, 0.15);
+            font-size: var(--text-xs);
+            color: var(--color-gold);
+            background: rgba(212, 175, 55, 0.12);
             padding: 1px 8px;
-            border-radius: 10px;
+            border-radius: var(--radius-full);
           }
           .cart-item-price {
-            font-size: 0.75rem;
-            color: var(--color-text-muted, #999999);
+            font-size: var(--text-xs);
+            color: var(--color-text-muted);
+            width: 100%;
           }
           .cart-item-actions {
             display: flex;
@@ -330,96 +334,118 @@ export default function CartDrawer({
             gap: 6px;
           }
           .qty-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            color: var(--color-gold, #D4AF37);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--color-border-strong);
+            color: var(--color-gold);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all var(--transition-fast, 150ms ease);
+            font-size: var(--text-md);
+            transition: all var(--transition-fast);
             flex-shrink: 0;
           }
           .qty-btn:hover {
-            background: var(--color-gold, #D4AF37);
-            color: var(--color-bg, #0D0D0D);
+            background: var(--color-gold);
+            color: var(--color-text-inverse);
+            border-color: var(--color-gold);
           }
           .qty-display {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--color-text-primary, #FFFFFF);
+            font-weight: var(--weight-bold);
+            font-size: var(--text-base);
+            color: var(--color-text-primary);
             min-width: 28px;
             text-align: center;
           }
           .cart-item-total {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--color-gold, #D4AF37);
+            font-weight: var(--weight-bold);
+            font-size: var(--text-sm);
+            color: var(--color-gold);
             margin-left: auto;
-            margin-right: var(--space-sm, 8px);
+            margin-right: var(--space-2);
           }
           .remove-btn {
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
-            padding: 4px;
-            opacity: 0.5;
-            transition: opacity var(--transition-fast, 150ms ease);
+            padding: 6px;
+            opacity: 0.45;
+            color: var(--color-text-muted);
+            transition: all var(--transition-fast);
+            border-radius: var(--radius-sm);
+            display: flex;
           }
           .remove-btn:hover {
             opacity: 1;
+            color: var(--color-red);
+            background: rgba(227, 30, 36, 0.08);
+          }
+
+          /* View Full Cart Link */
+          .view-full-cart {
+            display: block;
+            text-align: center;
+            padding: var(--space-3);
+            margin-top: var(--space-2);
+            color: var(--color-gold);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-semibold);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--color-border-strong);
+            transition: all var(--transition-fast);
+          }
+          .view-full-cart:hover {
+            background: rgba(212, 175, 55, 0.06);
+            border-style: solid;
           }
 
           /* Footer */
           .drawer-footer {
-            padding: var(--space-lg, 24px);
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: var(--space-5) var(--space-6);
+            border-top: 1px solid var(--color-border);
             flex-shrink: 0;
-            background: var(--color-bg, #0D0D0D);
+            background: var(--color-bg);
           }
           .cart-summary {
-            margin-bottom: var(--space-md, 16px);
+            margin-bottom: var(--space-4);
           }
           .summary-row {
             display: flex;
             justify-content: space-between;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            color: var(--color-text-secondary, #E0E0E0);
+            font-size: var(--text-sm);
+            color: var(--color-text-secondary);
           }
           .summary-row.total {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--color-gold, #D4AF37);
+            font-size: var(--text-lg);
+            font-weight: var(--weight-bold);
+            color: var(--color-gold);
           }
           .checkout-btn {
             width: 100%;
             padding: 14px;
-            background: var(--color-gold, #D4AF37);
-            color: var(--color-bg, #0D0D0D);
+            background: var(--color-gold);
+            color: var(--color-text-inverse);
             border: none;
-            border-radius: var(--radius-md, 8px);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 700;
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            font-weight: var(--weight-bold);
             text-transform: uppercase;
+            letter-spacing: var(--tracking-wide);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all var(--transition-fast, 150ms ease);
+            transition: all var(--transition-fast);
           }
           .checkout-btn:hover,
           .checkout-btn:focus-visible {
-            background: var(--color-gold-light, #E8C84A);
+            background: var(--color-gold-light);
             outline: none;
-            box-shadow: 0 0 16px rgba(212, 175, 55, 0.5);
+            box-shadow: var(--shadow-gold);
           }
           .checkout-btn:active {
             transform: scale(0.98);

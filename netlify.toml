@@ -2,7 +2,10 @@
   command = "npm run build"
   publish = "out"
 
+# SPA fallback: only redirect to index.html if the file doesn't exist
+# This allows /cart to resolve to /cart.html (Next.js static export)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false

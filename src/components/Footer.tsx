@@ -79,88 +79,99 @@ export default function Footer({ restaurant }: FooterProps) {
 
       <style jsx>{`
         .footer {
-          background: var(--color-bg, #0D0D0D);
-          border-top: 2px solid var(--color-gold, #D4AF37);
-          padding: var(--space-2xl, 48px) 0 var(--space-lg, 24px);
-          margin-top: var(--space-2xl, 48px);
+          background: var(--color-bg);
+          border-top: 2px solid var(--color-gold);
+          padding: var(--space-12) 0 var(--space-6);
+          margin-top: auto;
         }
         .footer-inner {
           text-align: center;
         }
         .footer-brand {
-          margin-bottom: var(--space-lg, 24px);
+          margin-bottom: var(--space-6);
         }
         .footer-name {
-          font-size: 1.4rem;
-          color: var(--color-gold, #D4AF37);
-          margin-bottom: 4px;
+          font-size: var(--text-xl);
+          color: var(--color-gold);
+          margin-bottom: var(--space-1);
+          text-shadow: 0 0 16px rgba(212, 175, 55, 0.2);
         }
         .footer-tagline {
-          font-size: 0.9rem;
-          color: var(--color-text-secondary, #E0E0E0);
+          font-size: var(--text-sm);
+          color: var(--color-text-secondary);
         }
         .footer-contact {
-          margin: var(--space-lg, 24px) 0;
+          margin: var(--space-6) 0;
         }
         .contact-line {
-          font-family: var(--font-body);
-          font-size: 0.85rem;
-          color: var(--color-text-secondary, #E0E0E0);
-          margin: 8px 0;
+          font-size: var(--text-sm);
+          color: var(--color-text-secondary);
+          margin: var(--space-2) 0;
         }
         .contact-line a {
-          color: var(--color-gold, #D4AF37);
+          color: var(--color-gold);
           text-decoration: none;
-          transition: color var(--transition-fast, 150ms ease);
+          transition: color var(--transition-fast);
         }
         .contact-line a:hover {
-          color: var(--color-gold-light, #E8C84A);
+          color: var(--color-gold-light);
           text-decoration: underline;
         }
         .footer-social {
-          margin: var(--space-lg, 24px) 0;
+          margin: var(--space-6) 0;
         }
         .social-label {
           display: block;
-          font-size: 0.75rem;
-          font-weight: 700;
+          font-size: var(--text-xs);
+          font-weight: var(--weight-bold);
           text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: var(--color-text-muted, #999999);
-          margin-bottom: var(--space-sm, 8px);
+          letter-spacing: var(--tracking-wider);
+          color: var(--color-text-muted);
+          margin-bottom: var(--space-2);
         }
         .social-links {
           display: flex;
           justify-content: center;
-          gap: var(--space-md, 16px);
+          flex-wrap: wrap;
+          gap: var(--space-2);
         }
         .social-link {
-          font-family: var(--font-body);
-          font-size: 0.82rem;
-          color: var(--color-text-secondary, #E0E0E0);
+          font-size: var(--text-xs);
+          color: var(--color-text-secondary);
           text-decoration: none;
-          border: 1px solid rgba(212, 175, 55, 0.3);
+          border: 1px solid var(--color-border-strong);
           padding: 6px 16px;
-          border-radius: 20px;
-          transition: all var(--transition-fast, 150ms ease);
+          border-radius: var(--radius-full);
+          transition: all var(--transition-fast);
         }
         .social-link:hover {
-          border-color: var(--color-gold, #D4AF37);
-          color: var(--color-gold, #D4AF37);
+          border-color: var(--color-gold);
+          color: var(--color-gold);
         }
         .footer-bottom {
-          margin-top: var(--space-lg, 24px);
-          padding-top: var(--space-md, 16px);
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          margin-top: var(--space-6);
+          padding-top: var(--space-4);
+          border-top: 1px solid var(--color-border-subtle);
         }
         .copyright {
-          font-size: 0.75rem;
-          color: var(--color-text-muted, #999999);
+          font-size: var(--text-xs);
+          color: var(--color-text-muted);
         }
         .powered-by {
-          font-size: 0.7rem;
-          color: var(--color-text-muted, #999999);
-          margin-top: 4px;
+          font-size: var(--text-xs);
+          color: var(--color-text-muted);
+          margin-top: var(--space-1);
+          opacity: 0.7;
+        }
+
+        @media (min-width: 768px) {
+          .social-links {
+            gap: var(--space-3);
+          }
+          .social-link {
+            font-size: var(--text-sm);
+            padding: 8px 20px;
+          }
         }
       `}</style>
     </footer>

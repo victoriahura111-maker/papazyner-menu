@@ -1,9 +1,11 @@
 // ============================================
 // PAPAZYNER'S - MAIN PAGE (INDEX)
+// Refined, mobile-first, design-aligned
 // ============================================
 
 import React, { useState, useCallback, useMemo } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import type { MenuItem, MenuCategory, Order } from '@/utils/types';
 import { getMenuData, formatNaira } from '@/utils/menuParser';
 import { useCart } from '@/hooks/useCart';
@@ -48,7 +50,6 @@ export default function Home() {
   React.useEffect(() => {
     if (isLoaded) {
       setMenuVisible(true);
-      // Set initial category from URL hash if present
       const hash = window.location.hash?.replace('#', '');
       if (hash && categories.some((c) => c.id === hash)) {
         setActiveCategory(hash);
@@ -83,7 +84,6 @@ export default function Home() {
     setView('menu');
   }, []);
 
-  // Check if an item is in cart
   const isItemInCart = useCallback(
     (itemId: string, variationLabel?: string) => {
       return items.some((ci) => {
@@ -95,20 +95,19 @@ export default function Home() {
     [items]
   );
 
-  // Active category items
   const activeItems = useMemo(() => {
     const cat = categories.find((c) => c.id === activeCategory);
     return cat?.items || [];
   }, [categories, activeCategory]);
 
-  // Loading state
+  // --- Loading State ---
   if (!isLoaded) {
     return (
       <div className="loading-screen">
         <div className="loading-content">
           <h1 className="loading-name gothic">Papazyner's</h1>
           <p className="loading-tagline script">Quality of Real Taste</p>
-          <div className="loading-spinner" />
+          <div className="processing-spinner" />
         </div>
 
         <style jsx>{`
@@ -117,33 +116,19 @@ export default function Home() {
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: var(--color-bg, #0D0D0D);
+            background: var(--color-bg);
           }
-          .loading-content {
-            text-align: center;
-          }
+          .loading-content { text-align: center; }
           .loading-name {
-            font-size: 2rem;
-            color: var(--color-gold, #D4AF37);
-            margin-bottom: 4px;
+            font-size: var(--text-3xl);
+            color: var(--color-gold);
+            margin-bottom: var(--space-1);
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
           }
           .loading-tagline {
-            font-size: 1.1rem;
-            color: var(--color-text-secondary, #E0E0E0);
-            margin-bottom: var(--space-xl, 32px);
-          }
-          .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(212, 175, 55, 0.2);
-            border-top-color: var(--color-gold, #D4AF37);
-            border-radius: 50%;
-            margin: 0 auto;
-            animation: spin 0.8s linear infinite;
-          }
-          @keyframes spin {
-            to { transform: rotate(360deg); }
+            font-size: var(--text-lg);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
           }
         `}</style>
       </div>
@@ -157,12 +142,11 @@ export default function Home() {
       </Head>
 
       <div className="app">
-        {/* Header */}
+        {/* Header — cart icon navigates to /cart page */}
         <Header
           restaurantName={restaurant.name}
           tagline={restaurant.tagline}
           cartCount={totalItems}
-          onCartClick={() => setCartOpen(true)}
         />
 
         {view === 'menu' && (
@@ -175,11 +159,16 @@ export default function Home() {
             />
 
             {/* Menu Grid */}
-            <main className="menu-grid container" style={{ opacity: menuVisible ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+            <main
+              className="menu-grid container"
+              style={{ opacity: menuVisible ? 1 : 0, transition: 'opacity 0.35s var(--transition-base)' }}
+            >
               {activeCategory && (
                 <div className="category-section">
                   <div className="category-header">
-                    <h2 className="category-title gothic">{categories.find(c => c.id === activeCategory)?.name}</h2>
+                    <h2 className="category-title gothic">
+                      {categories.find((c) => c.id === activeCategory)?.name}
+                    </h2>
                     <div className="gold-divider" />
                   </div>
 
@@ -218,7 +207,7 @@ export default function Home() {
           onClearCart={clearCart}
         />
 
-        {/* Cart Drawer */}
+        {/* Cart Drawer (quick view on mobile) */}
         <CartDrawer
           isOpen={cartOpen}
           onClose={() => setCartOpen(false)}
@@ -231,17 +220,13 @@ export default function Home() {
           onCheckout={handleCheckout}
         />
 
-        {/* Floating Cart Button (mobile) */}
+        {/* Floating Cart Button (mobile) — links to /cart */}
         {view === 'menu' && totalItems > 0 && !cartOpen && (
-          <button
-            className="floating-cart-btn"
-            onClick={() => setCartOpen(true)}
-            aria-label={`Open cart with ${totalItems} items`}
-          >
+          <Link href="/cart" className="floating-cart-btn" aria-label={`View cart — ${totalItems} items, ${formatNaira(subtotal)}`}>
             <span className="floating-cart-icon">🛒</span>
             <span className="floating-cart-count">{totalItems}</span>
             <span className="floating-cart-total">{formatNaira(subtotal)}</span>
-          </button>
+          </Link>
         )}
       </div>
 
@@ -251,70 +236,70 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           position: relative;
-          z-index: 1;
+          z-index: var(--z-base);
         }
 
         .menu-grid {
           flex: 1;
-          padding-top: var(--space-md, 16px);
-          padding-bottom: var(--space-2xl, 48px);
+          padding-top: var(--space-4);
+          padding-bottom: var(--space-12);
         }
 
         .category-section {
-          margin-bottom: var(--space-lg, 24px);
+          margin-bottom: var(--space-6);
         }
 
         .category-header {
-          margin-bottom: var(--space-md, 16px);
+          margin-bottom: var(--space-4);
         }
 
         .category-title {
-          font-size: 1.3rem;
-          color: var(--color-text-primary, #FFFFFF);
-          margin-bottom: var(--space-sm, 8px);
+          font-size: var(--text-xl);
+          color: var(--color-text-primary);
+          margin-bottom: var(--space-2);
           text-align: center;
         }
 
         .empty-category {
           text-align: center;
-          padding: var(--space-xl, 32px);
-          color: var(--color-text-muted, #999999);
-          font-family: var(--font-body);
+          padding: var(--space-8);
+          color: var(--color-text-muted);
         }
 
         .menu-items {
           display: grid;
           grid-template-columns: 1fr;
-          gap: var(--space-md, 16px);
+          gap: var(--space-4);
         }
 
         /* Floating Cart Button */
         .floating-cart-btn {
           position: fixed;
-          bottom: 20px;
+          bottom: 24px;
           left: 50%;
           transform: translateX(-50%);
-          z-index: 250;
-          background: var(--color-gold, #D4AF37);
-          color: var(--color-bg, #0D0D0D);
+          z-index: var(--z-dropdown);
+          background: var(--color-gold);
+          color: var(--color-text-inverse);
           border: none;
-          border-radius: 50px;
-          padding: 12px 24px;
+          border-radius: var(--radius-full);
+          padding: 14px 24px;
           display: flex;
           align-items: center;
           gap: 10px;
-          font-family: var(--font-body);
-          font-weight: 700;
-          font-size: 0.9rem;
+          font-weight: var(--weight-bold);
+          font-size: var(--text-sm);
           cursor: pointer;
-          box-shadow: 0 4px 24px rgba(212, 175, 55, 0.4);
-          animation: slideUp 0.3s ease;
-          transition: all var(--transition-fast, 150ms ease);
+          text-decoration: none;
+          box-shadow: var(--shadow-gold-lg);
+          animation: slideUp 0.3s var(--transition-base);
+          transition: all var(--transition-fast);
+          -webkit-tap-highlight-color: transparent;
         }
         .floating-cart-btn:hover,
         .floating-cart-btn:focus-visible {
-          background: var(--color-gold-light, #E8C84A);
-          box-shadow: 0 6px 28px rgba(212, 175, 55, 0.6);
+          background: var(--color-gold-light);
+          box-shadow: 0 6px 32px rgba(212, 175, 55, 0.55);
           outline: none;
           transform: translateX(-50%) translateY(-2px);
         }
@@ -325,21 +310,22 @@ export default function Home() {
           font-size: 1.2rem;
         }
         .floating-cart-count {
-          background: var(--color-bg, #0D0D0D);
-          color: var(--color-gold, #D4AF37);
-          border-radius: 50%;
+          background: var(--color-text-inverse);
+          color: var(--color-gold);
+          border-radius: var(--radius-full);
           min-width: 24px;
           height: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.75rem;
+          font-size: var(--text-xs);
+          font-weight: var(--weight-bold);
         }
         .floating-cart-total {
-          font-size: 0.85rem;
+          font-size: var(--text-sm);
         }
 
-        /* Responsive: 2-column grid on larger screens */
+        /* Responsive grid */
         @media (min-width: 600px) {
           .menu-items {
             grid-template-columns: repeat(2, 1fr);
@@ -351,7 +337,7 @@ export default function Home() {
             grid-template-columns: repeat(3, 1fr);
           }
           .category-title {
-            font-size: 1.6rem;
+            font-size: var(--text-2xl);
           }
         }
       `}</style>
