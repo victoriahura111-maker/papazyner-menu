@@ -108,19 +108,19 @@ export default function Header({
         }
         .cart-badge {
           position: absolute;
-          top: -6px;
-          right: -6px;
+          top: 2px;
+          right: 2px;
           background: var(--color-red);
           color: #fff;
-          font-size: 0.65rem;
+          font-size: 0.6rem;
           font-weight: var(--weight-bold);
-          min-width: 20px;
-          height: 20px;
+          min-width: 18px;
+          height: 18px;
           border-radius: var(--radius-full);
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0 5px;
+          padding: 0 4px;
           animation: fadeIn 0.2s ease;
           line-height: 1;
           box-shadow: 0 0 0 2px var(--color-bg);
