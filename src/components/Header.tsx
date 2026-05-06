@@ -108,8 +108,8 @@ export default function Header({
         }
         .cart-badge {
           position: absolute;
-          top: -8px;
-          right: -8px;
+          top: -6px;
+          right: -6px;
           background: var(--color-red);
           color: #fff;
           font-size: 0.65rem;
@@ -123,6 +123,7 @@ export default function Header({
           padding: 0 5px;
           animation: fadeIn 0.2s ease;
           line-height: 1;
+          box-shadow: 0 0 0 2px var(--color-bg);
         }
 
         @media (max-width: 380px) {
