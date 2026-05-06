@@ -108,22 +108,44 @@ export default function Header({
         }
         .cart-badge {
           position: absolute;
-          top: 2px;
-          right: 2px;
+          top: -4px;
+          right: -4px;
           background: var(--color-red);
           color: #fff;
-          font-size: 0.6rem;
+          font-size: 0.65rem;
           font-weight: var(--weight-bold);
-          min-width: 18px;
-          height: 18px;
+          min-width: 20px;
+          height: 20px;
           border-radius: var(--radius-full);
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0 4px;
+          padding: 0 5px;
           animation: fadeIn 0.2s ease;
           line-height: 1;
           box-shadow: 0 0 0 2px var(--color-bg);
+        }
+
+        /* Desktop: pull badge closer to the icon */
+        @media (min-width: 600px) {
+          .cart-badge {
+            top: 0;
+            right: 0;
+            min-width: 18px;
+            height: 18px;
+            font-size: 0.6rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cart-badge {
+            top: 2px;
+            right: 2px;
+            font-size: 0.6rem;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 4px;
+          }
         }
 
         @media (max-width: 380px) {
